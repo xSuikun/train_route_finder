@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}{{city.name}}{% endblock %}
+{% block content %}
+<div class="div col-md">
+    <h1>Подробный просмотр</h1>
+</div>
+<div class="row">
+    <div class="div col-md">
+        <table class="table table-success table-striped table-hover">
+            <tr>
+                <th>Название</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Время поездки</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <td>{{train.name}}</td>
+                <td>{{train.from_city}}</td>
+                <td>{{train.to_city}}</td>
+                <td>{{train.travel_time}}ч.</td>
+                <td>
+                    <a href="">
+                        <button class="btn btn-secondary">Редактировать</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="">
+                        <button class="btn btn-danger">Удалить</button>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

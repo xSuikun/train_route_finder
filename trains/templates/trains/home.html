@@ -1,26 +1,34 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
-<h1>Список городов</h1>
+<h1>Список поездов</h1>
 <div class="row">
     <div class="div col-md">
         <table class="table table-success table-striped table-hover">
             <tr>
-                <th>Код</th>
                 <th>Название</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Время поездки</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
-            {% for city in cities %}
+            {% for train in trains %}
             <tr>
-                <th>{{ city.id }}</th>
-                <td><a href="{{city.get_absolute_url}}" style="text-decoration: none;">{{city.name}}</a></td>
-                <td><a href="{% url 'cities:update' pk=city.pk %}">
-                    <button class="btn btn-secondary">Редактировать</button>
-                </a></td>
-                <td><a href="{% url 'cities:delete' pk=city.pk %}">
-                    <button class="btn btn-danger">Удалить</button>
-                </a></td>
+                <td><a href="{{ train.get_absolute_url }}" style="text-decoration: none; ">{{train.name}}</a></td>
+                <td>{{train.from_city}}</td>
+                <td>{{train.to_city}}</td>
+                <td>{{train.travel_time}}ч.</td>
+                <td>
+                    <a href="{% url 'trains:update' pk=train.pk %}">
+                        <button class="btn btn-secondary">Редактировать</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'trains:delete' pk=train.pk %}">
+                        <button class="btn btn-danger">Удалить</button>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </table>

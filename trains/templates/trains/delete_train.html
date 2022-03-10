@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Удалить поезд {{train.name}}?{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="div col-md">
+        <h1>Удалить поезд "{{train.name}}"?</h1>
+    </div>
+</div>
+{% include 'trains/train_form.html' with button_text='Удалить' %}
+{% endblock %}

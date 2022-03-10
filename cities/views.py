@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from cities.models import City
-from cities.forms import AddCityForm, UpdateCityForm
+from cities.forms import CityForm
 
 __all__ = (
     'CitiesHome',
@@ -16,11 +16,7 @@ __all__ = (
 
 class MyUpdateView(UpdateView):
     def get_success_url(self):
-        if 'pk' in self.kwargs:
-            print(self.kwargs['pk'])
-            print(self.object.pk)
-            pk = self.kwargs['pk']
-        else:
+        if not 'pk' in self.kwargs:
             return reverse_lazy('cities:home')
         return reverse_lazy('cities:update', kwargs={'pk': self.object.pk})
 
@@ -29,7 +25,7 @@ class CitiesHome(ListView):
     model = City
     template_name = 'cities/home.html'
     context_object_name = 'cities'
-    extra_context = {'title': 'Главная'}
+    extra_context = {'title': 'Города'}
     paginate_by = 10
 
     def get_queryset(self):
@@ -45,7 +41,7 @@ class CityDetail(DetailView):
 
 class CityCreate(SuccessMessageMixin, CreateView):
     model = City
-    form_class = AddCityForm
+    form_class = CityForm
     success_url = reverse_lazy('cities:add')
     template_name = 'cities/add_city.html'
     success_message = "Город успешно добавлен"
@@ -53,7 +49,7 @@ class CityCreate(SuccessMessageMixin, CreateView):
 
 class CityUpdate(SuccessMessageMixin, UpdateView):
     model = City
-    form_class = UpdateCityForm
+    form_class = CityForm
     context_object_name = 'city'
     template_name = 'cities/update_city.html'
     success_message = "Город успешно отредактирован"

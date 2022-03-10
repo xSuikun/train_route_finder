@@ -1,5 +1,7 @@
-{% url 'cities:home' as home_url %}
-{% url 'cities:add' as create_url %}
+{% url 'cities:home' as cities_home_url %}
+{% url 'trains:home' as trains_home_url %}
+{% url 'cities:add' as city_create_url %}
+{% url 'trains:add' as train_create_url %}
 <!doctype html>
 <html lang="ru">
 <head>
@@ -14,34 +16,44 @@
 <ul class="nav nav-pills container bg-light">
     <li class="nav-item">
         <a class="nav-link
-        {% if request.path == home_url %}
+        {% if request.path == cities_home_url %}
         	active
         {% endif %}
-        	" aria-current="page" href="{{ home_url }}">Главная</a>
+        	" aria-current="page" href="{{ cities_home_url }}">Города</a>
     </li>
     <li class="nav-item">
         <a class="nav-link
-        {% if request.path == create_url %}
+        {% if request.path == trains_home_url %}
         	active
         {% endif %}
-        	" aria-current="page" href="{{ create_url }}">Добавить город</a>
+        	" aria-current="page" href="{{ trains_home_url }}">Поезда</a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Добавить</a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'cities:home' %}">Главная</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
+            <li>
+                <a class="dropdown-item
+                {% if request.path == city_create_url %}
+                 active
+                {% endif %}
+                " aria-current="page" href="{{ city_create_url }}">Добавить город
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item
+                {% if request.path == train_create_url %}
+                    active
+                {% endif %}
+                " aria-current="page" href="{{ train_create_url }}">Добавить поезд</a>
+            </li>
         </ul>
     </li>
 </ul>
 {% if messages %}
 {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        {{ message }}
-    </div>
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    {{ message }}
+</div>
 {% endfor %}
 {% endif %}
 <div class="container">
