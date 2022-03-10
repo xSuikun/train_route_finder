@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Редактирование города {{city.name}}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="div col-md">
+        <h1>Редактирование города {{city.name}}</h1>
+    </div>
+</div>
+{% include 'cities/city_form.html' with button_text='Изменить' %}
+{% endblock %}

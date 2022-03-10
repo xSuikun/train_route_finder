@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h1>Список городов</h1>
+<div class="row">
+    <div class="div col-md">
+        <table class="table table-success table-striped table-hover">
+            {% for city in cities %}
+            <tr>
+                <th>{{ city.id }}</th>
+                <td><a href="{{city.get_absolute_url}}" style="text-decoration: none;">{{city.name}}</a></td>
+                <td><a href="{% url 'cities:update' pk=city.pk %}">
+                    <button class="btn btn-secondary">Редактировать</button>
+                </a></td>
+                <td><a href="{% url 'cities:delete' pk=city.pk %}">
+                    <button class="btn btn-danger">Удалить</button>
+                </a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                <a class="page-link"
+                   href="?page=
+                   {% if not page_obj.has_previous %}
+                   1
+                   {% else %}
+                   {{ page_obj.previous_page_number }}
+                   {% endif %}"
+                   tabindex="-1"
+                   aria-disabled="true">
+                    Пред.
+                </a>
+            </li>
+            {% for page in page_obj.paginator %}
+            <li class="page-item {% if page.number == page_obj.number %}active{% endif %}">
+                <a class="page-link" href="?page={{ page.number }}">{{ page.number }}</a>
+            </li>
+            {% endfor %}
+            <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                <a class="page-link"
+                   href="?page=
+                   {% if not page_obj.has_next %}
+                   {{ page_obj.num_pages }}
+                   {% else %}
+                   {{ page_obj.next_page_number }}
+                   {% endif %}"
+                   tabindex="-1"
+                   aria-disabled="true">
+                    Пред.
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+
+
+	
