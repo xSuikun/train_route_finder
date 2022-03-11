@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class Train(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='Название поезда')
-    travel_time = models.PositiveSmallIntegerField(verbose_name='Время в пути')
+    travel_time = models.PositiveSmallIntegerField(verbose_name='Время пути')
     from_city = models.ForeignKey('cities.City', on_delete=models.CASCADE, verbose_name='Откуда',
                                   related_name='from_sity_set')
     to_city = models.ForeignKey('cities.City', on_delete=models.CASCADE, verbose_name='Куда',

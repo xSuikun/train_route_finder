@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Добавить поезд{% endblock %}
+{% block content %}
+<h1 class="mt-3">Выбор маршрута</h1>
+{% url 'routes:find_routes' as action %}
+{% include 'routes/route_form.html' with button_text='Поиск' action=action %}
+{% endblock %}
+
+
+
+	

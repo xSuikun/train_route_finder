@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-4">
+        <form action="{{ action }}" method="post">
+            {% csrf_token %}
+            <div class="mb-3 mt-3">
+                <label class="form-label">{{ form.from_city.label_tag }}</label>
+                {{ form.from_city }}
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label">{{ form.to_city.label_tag }}</label>
+                {{ form.to_city }}
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label">{{ form.travel_time.label_tag }}</label>
+                {{ form.travel_time }}
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label">{{ form.cities.label_tag }}</label>
+                {{ form.cities }}
+            </div>
+            <button type="submit" class="btn btn-primary" name="search_form">{{ button_text }}</button>
+        </form>
+    </div>
+</div>

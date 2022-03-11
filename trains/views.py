@@ -64,6 +64,3 @@ class TrainDelete(SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('trains:home')
     template_name = 'trains/delete_train.html'
     success_message = "Город успешно удален"
-
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)

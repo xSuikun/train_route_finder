@@ -64,6 +64,3 @@ class CityDelete(SuccessMessageMixin, DeleteView):
     template_name = 'cities/delete_city.html'
     success_message = "Город успешно удален"
 
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
-
