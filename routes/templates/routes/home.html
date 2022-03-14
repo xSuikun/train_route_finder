@@ -1,7 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}Добавить поезд{% endblock %}
 {% block content %}
-<h1 class="mt-3">Выбор маршрута</h1>
+<h1 class="mt-3">Поиск маршрута</h1>
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        {% if routes %}
+        <h3>
+            Маршрут{% if routes|length != 1 %}ы{% endif %} из г. {{ cities.from_city }} в г. {{ cities.to_city }}
+        </h3>
+        {% for route in routes %}
+        <br>
+        <h5>Список поездов по маршруту #{{ forloop.counter }}:</h5>
+        <table class="table table-success table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Откуда</th>
+                <th scope="col">Куда</th>
+                <th scope="col">Время пути</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for train in route.trains %}
+            <tr>
+                <td>{{ train.name }}</td>
+                <td>{{ train.from_city.name }}</td>
+                <td>{{ train.to_city.name }}</td>
+                <td>{{ train.travel_time }}ч.</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2"></td>
+                <td>Общее время пути:</td>
+                <td>{{ route.total_travel_time }}ч.</td>
+            </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% url 'routes:find_routes' as action %}
 {% include 'routes/route_form.html' with button_text='Поиск' action=action %}
 {% endblock %}
