@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{city.name}}{% endblock %}
+{% block title %}{{train.name}}{% endblock %}
 {% block content %}
 <div class="div col-md">
     <h1>Подробный просмотр</h1>
@@ -21,12 +21,12 @@
                 <td>{{train.to_city}}</td>
                 <td>{{train.travel_time}}ч.</td>
                 <td>
-                    <a href="">
+                    <a href="{% url 'trains:update' pk=train.pk %}">
                         <button class="btn btn-secondary">Редактировать</button>
                     </a>
                 </td>
                 <td>
-                    <a href="">
+                    <a href="{% url 'trains:delete' pk=train.pk %}">
                         <button class="btn btn-danger">Удалить</button>
                     </a>
                 </td>

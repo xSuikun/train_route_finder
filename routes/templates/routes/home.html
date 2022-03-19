@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Добавить поезд{% endblock %}
+{% block title %}Поиск маршрута{% endblock %}
 {% block content %}
 <h1 class="mt-3">Поиск маршрута</h1>
 <div class="row">
@@ -9,33 +9,40 @@
             Маршрут{% if routes|length != 1 %}ы{% endif %} из г. {{ cities.from_city }} в г. {{ cities.to_city }}
         </h3>
         {% for route in routes %}
-        <br>
-        <h5>Список поездов по маршруту #{{ forloop.counter }}:</h5>
-        <table class="table table-success table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Название</th>
-                <th scope="col">Откуда</th>
-                <th scope="col">Куда</th>
-                <th scope="col">Время пути</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for train in route.trains %}
-            <tr>
-                <td>{{ train.name }}</td>
-                <td>{{ train.from_city.name }}</td>
-                <td>{{ train.to_city.name }}</td>
-                <td>{{ train.travel_time }}ч.</td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <td colspan="2"></td>
-                <td>Общее время пути:</td>
-                <td>{{ route.total_travel_time }}ч.</td>
-            </tr>
-            </tbody>
-        </table>
+        <form action="{% url 'routes:create_route' %}" method="post"> {% csrf_token %}
+            <input type="hidden" name="from_city" value="{{ cities.from_city.id }}">
+            <input type="hidden" name="to_city" value="{{ cities.to_city.id }}">
+            <input type="hidden" name="travel_time" value="{{ route.total_travel_time }}">
+            <input type="hidden" name="trains" value="{% for train in route.trains %}{{ train.id }},{% endfor %}">
+            <br>
+            <h5>Список поездов по маршруту #{{ forloop.counter }}:</h5>
+            <table class="table table-success table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Откуда</th>
+                    <th scope="col">Куда</th>
+                    <th scope="col">Время пути</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for train in route.trains %}
+                <tr>
+                    <td>{{ train.name }}</td>
+                    <td>{{ train.from_city.name }}</td>
+                    <td>{{ train.to_city.name }}</td>
+                    <td>{{ train.travel_time }}ч.</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2"></td>
+                    <td>Общее время пути:</td>
+                    <td>{{ route.total_travel_time }}ч.</td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </form>
         {% endfor %}
         {% endif %}
     </div>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Сохранение маршрута{% endblock %}
+{% block content %}
+<h1 class="mt-3">Сохранение маршрута</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form action="{% url 'routes:save_route' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3 mt-3">
+                <label class="form-label">{{ form.name.label_tag }}</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-3 mt-3">
+                {{ form.from_city }}
+            </div>
+            <div class="mb-3 mt-3">
+                {{ form.to_city }}
+            </div>
+            <div class="mb-3 mt-3">
+                {{ form.travel_time }}
+            </div>
+            <div class="mb-3 mt-3">
+                {{ form.trains }}
+            </div>
+            <button type="submit" class="btn btn-primary" name="search_form">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+
+	

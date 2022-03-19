@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Route(models.Model):
@@ -18,10 +19,10 @@ class Route(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('trains:detail', kwargs={'pk': self.pk})
-
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('routes:detail', kwargs={'pk': self.pk})
 

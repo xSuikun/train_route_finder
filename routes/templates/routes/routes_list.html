@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Список маршрутов{% endblock %}
+{% block content %}
+<h1>Список маршрутов</h1>
+<div class="row">
+    <div class="div col-md">
+        <table class="table table-success table-striped table-hover">
+            <tr>
+                <th>Название</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Длительность поездки</th>
+            </tr>
+            {% for route in routes %}
+            <tr>
+                <td><a href="{{ route.get_absolute_url }}">{{route.name}}</a></td>
+                <td>{{route.from_city}}</td>
+                <td>{{route.to_city}}</td>
+                <td>{{route.travel_time}}ч.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                <a class="page-link"
+                   href="?page=
+                   {% if not page_obj.has_previous %}
+                   1
+                   {% else %}
+                   {{ page_obj.previous_page_number }}
+                   {% endif %}"
+                   tabindex="-1"
+                   aria-disabled="true">
+                    Пред.
+                </a>
+            </li>
+            {% for page in page_obj.paginator %}
+            <li class="page-item {% if page.number == page_obj.number %}active{% endif %}">
+                <a class="page-link" href="?page={{ page.number }}">{{ page.number }}</a>
+            </li>
+            {% endfor %}
+            <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                <a class="page-link"
+                   href="?page=
+                   {% if not page_obj.has_next %}
+                   {{ page_obj.num_pages }}
+                   {% else %}
+                   {{ page_obj.next_page_number }}
+                   {% endif %}"
+                   tabindex="-1"
+                   aria-disabled="true">
+                    Пред.
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+
+
+	
