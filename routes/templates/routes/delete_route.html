@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Удалить маршрут {{route.name}}?{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="div col-md">
+        <h1>Удалить маршрут "{{route.name}}"?</h1>
+    </div>
+</div>
+{% include 'routes/route_form.html' with button_text='Удалить' %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="div col-md">
+        <h1>Регистрация</h1>
+    </div>
+</div>
+{% include 'accounts/registration_form.html' with button_text='Зарегистрироваться' %}
+{% endblock %}

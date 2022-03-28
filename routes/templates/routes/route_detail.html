@@ -2,7 +2,7 @@
 {% block title %}{{route.name}}{% endblock %}
 {% block content %}
 <div class="div col-md">
-    <h1>Подробный просмотр</h1>
+    <h1>Подробный просмотр маршрута</h1>
 </div>
 <div class="row">
     <div class="div col-md">
@@ -13,6 +13,9 @@
                 <th>Куда</th>
                 <th>Длительность поездки</th>
                 <th>Поезда</th>
+                {% if request.user.is_authenticated %}
+                <th>&nbsp;</th>
+                {% endif %}
             </tr>
             <tr>
                 <td><a href="{{ route.get_absolute_url }}">{{route.name}}</a></td>
@@ -21,9 +24,16 @@
                 <td>{{route.travel_time}}ч.</td>
                 <td>
                     {% for train in route.trains.all %}
-                        <p>{{ train.name }} ({{ train.travel_time }}ч.)</p>
+                    <p>{{ train.name }} ({{ train.travel_time }}ч.)</p>
                     {% endfor %}
                 </td>
+                {% if request.user.is_authenticated %}
+                <td>
+                    <a href="{% url 'routes:delete' pk=route.pk %}">
+                        <button class="btn btn-danger">Удалить</button>
+                    </a>
+                </td>
+                {% endif %}
             </tr>
         </table>
     </div>

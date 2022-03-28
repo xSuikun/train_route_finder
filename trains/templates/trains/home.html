@@ -10,8 +10,10 @@
                 <th>Откуда</th>
                 <th>Куда</th>
                 <th>Время поездки</th>
+                {% if request.user.is_authenticated %}
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
+                {% endif %}
             </tr>
             {% for train in trains %}
             <tr>
@@ -19,6 +21,7 @@
                 <td>{{train.from_city}}</td>
                 <td>{{train.to_city}}</td>
                 <td>{{train.travel_time}}ч.</td>
+                {% if request.user.is_authenticated %}
                 <td>
                     <a href="{% url 'trains:update' pk=train.pk %}">
                         <button class="btn btn-secondary">Редактировать</button>
@@ -29,6 +32,7 @@
                         <button class="btn btn-danger">Удалить</button>
                     </a>
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>

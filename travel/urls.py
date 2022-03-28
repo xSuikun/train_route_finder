@@ -20,5 +20,6 @@ urlpatterns = [
     path('cities/', include(('cities.urls', 'cities'))),
     path('trains/', include(('trains.urls', 'trains'))),
     path('routes/', include(('routes.urls', 'routes'))),
+    path('accounts/', include(('accounts.urls', 'accounts'))),
     path('admin/', admin.site.urls),
 ]

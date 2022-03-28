@@ -4,6 +4,9 @@
 {% url 'trains:add' as train_create_url %}
 {% url 'routes:home' as routes_home_url %}
 {% url 'routes:routes_list' as routes_list_url %}
+{% url 'accounts:login' as login_url %}
+{% url 'accounts:logout' as logout_url %}
+{% url 'accounts:registration' as registration_url %}
 <!doctype html>
 <html lang="ru">
 <head>
@@ -65,6 +68,29 @@
             </li>
         </ul>
     </li>
+
+    {% if request.user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{{ logout_url }}">Выйти</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link
+        {% if request.path == login_url %}
+        	active
+        {% endif %}
+        	" aria-current="page" href="{{ login_url }}">Войти</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link
+        {% if request.path == registration_url %}
+        	active
+        {% endif %}
+        	" aria-current="page" href="{{ registration_url }}">Зарегистрироваться</a>
+    </li>
+    {% endif %}
+
 </ul>
 {% if messages %}
 {% for message in messages %}

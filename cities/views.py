@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -39,28 +40,31 @@ class CityDetail(DetailView):
     slug_url_kwarg = 'pk'
 
 
-class CityCreate(SuccessMessageMixin, CreateView):
+class CityCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = City
     form_class = CityForm
     success_url = reverse_lazy('cities:add')
     template_name = 'cities/add_city.html'
     success_message = "Город успешно добавлен"
+    login_url = '/accounts/login'
 
 
-class CityUpdate(SuccessMessageMixin, UpdateView):
+class CityUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = City
     form_class = CityForm
     context_object_name = 'city'
     template_name = 'cities/update_city.html'
     success_message = "Город успешно отредактирован"
+    login_url = '/accounts/login'
 
     def get_success_url(self):
         return reverse_lazy('cities:update', kwargs={'pk': self.object.pk})
 
 
-class CityDelete(SuccessMessageMixin, DeleteView):
+class CityDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = City
     success_url = reverse_lazy('cities:home')
     template_name = 'cities/delete_city.html'
     success_message = "Город успешно удален"
+    login_url = '/accounts/login'
 

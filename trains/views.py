@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -40,27 +41,31 @@ class TrainDetail(DetailView):
     slug_url_kwarg = 'pk'
 
 
-class TrainCreate(SuccessMessageMixin, CreateView):
+class TrainCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Train
     form_class = TrainForm
     success_url = reverse_lazy('trains:add')
     template_name = 'trains/add_train.html'
     success_message = "Город успешно добавлен"
+    login_url = '/accounts/login'
 
 
-class TrainUpdate(SuccessMessageMixin, UpdateView):
+class TrainUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Train
     form_class = TrainForm
     context_object_name = 'train'
     template_name = 'trains/update_train.html'
     success_message = "Город успешно отредактирован"
+    login_url = '/accounts/login'
 
     def get_success_url(self):
         return reverse_lazy('trains:update', kwargs={'pk': self.object.pk})
 
 
-class TrainDelete(SuccessMessageMixin, DeleteView):
+class TrainDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Train
+    context_object_name = 'train'
     success_url = reverse_lazy('trains:home')
     template_name = 'trains/delete_train.html'
     success_message = "Город успешно удален"
+    login_url = '/accounts/login'

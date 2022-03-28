@@ -9,4 +9,5 @@ urlpatterns = [
     path('save_route/', SaveRoute.as_view(), name='save_route'),
     path('routes_list/', RoutesList.as_view(), name='routes_list'),
     path('<int:pk>/', RouteDetail.as_view(), name='detail'),
+    path('delete/<int:pk>/', RouteDelete.as_view(), name='delete'),
 ]

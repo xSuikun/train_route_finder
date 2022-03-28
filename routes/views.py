@@ -1,9 +1,11 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import FormView, ListView, DetailView
+from django.views.generic import FormView, ListView, DetailView, DeleteView
 
 from cities.models import City
 from routes.forms import RouteForm, CreateRouteForm
@@ -19,6 +21,7 @@ __all__ = (
     'SaveRoute',
     'RoutesList',
     'RouteDetail',
+    'RouteDelete',
 )
 
 
@@ -46,7 +49,9 @@ class SearchRoutes(View):
         return render(request, 'routes/home.html', {'form': form})
 
 
-class CreateRoute(View):
+class CreateRoute(LoginRequiredMixin, View):
+    login_url = '/accounts/login'
+
     def get(self, request):
         form = CreateRouteForm()
         messages.warning(request, 'Нет данных для маршрута')
@@ -74,7 +79,9 @@ class CreateRoute(View):
         return render(request, 'routes/create_route.html', context)
 
 
-class SaveRoute(View):
+class SaveRoute(LoginRequiredMixin, View):
+    login_url = '/accounts/login'
+
     def get(self, request):
         messages.warning(request, 'Невозможно сохранить несуществующий маршрут')
         return redirect('/routes')
@@ -106,3 +113,12 @@ class RouteDetail(DetailView):
     template_name = 'routes/route_detail.html'
     context_object_name = 'route'
     slug_url_kwarg = 'pk'
+
+
+class RouteDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+    model = Route
+    context_object_name = 'route'
+    success_url = reverse_lazy('routes:home')
+    template_name = 'routes/delete_route.html'
+    success_message = "Маршрут успешно удален"
+    login_url = '/accounts/login'

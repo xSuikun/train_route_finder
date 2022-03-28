@@ -8,19 +8,27 @@
             <tr>
                 <th>Код</th>
                 <th>Название</th>
+                {% if request.user.is_authenticated %}
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
+                {% endif %}
             </tr>
             {% for city in cities %}
             <tr>
                 <th>{{ city.id }}</th>
                 <td><a href="{{city.get_absolute_url}}" style="text-decoration: none;">{{city.name}}</a></td>
-                <td><a href="{% url 'cities:update' pk=city.pk %}">
-                    <button class="btn btn-secondary">Редактировать</button>
-                </a></td>
-                <td><a href="{% url 'cities:delete' pk=city.pk %}">
-                    <button class="btn btn-danger">Удалить</button>
-                </a></td>
+                {% if request.user.is_authenticated %}
+                <td>
+                    <a href="{% url 'cities:update' pk=city.pk %}">
+                        <button class="btn btn-secondary">Редактировать</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'cities:delete' pk=city.pk %}">
+                        <button class="btn btn-danger">Удалить</button>
+                    </a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>
