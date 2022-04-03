@@ -1,0 +1,298 @@
+[
+{
+  "model": "cities.city",
+  "pk": 6,
+  "fields": {
+    "name": "Санкт Петербург"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 7,
+  "fields": {
+    "name": "Киев"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 8,
+  "fields": {
+    "name": "Екатеринбург"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 9,
+  "fields": {
+    "name": "Вена"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 10,
+  "fields": {
+    "name": "Женева"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 11,
+  "fields": {
+    "name": "Нижний Новгород"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 12,
+  "fields": {
+    "name": "Берлин"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 13,
+  "fields": {
+    "name": "Москва"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 14,
+  "fields": {
+    "name": "Сочи"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 16,
+  "fields": {
+    "name": "Харьков"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 17,
+  "fields": {
+    "name": "Мадрид"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 18,
+  "fields": {
+    "name": "Варшава"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 19,
+  "fields": {
+    "name": "Хельсинки"
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 8,
+  "fields": {
+    "name": "В Екатеринбург через Москву и Питер",
+    "travel_time": 43,
+    "from_city": 11,
+    "to_city": 8,
+    "trains": [
+      3,
+      12,
+      4
+    ]
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 9,
+  "fields": {
+    "name": "Из Нижнего в Москву",
+    "travel_time": 11,
+    "from_city": 11,
+    "to_city": 13,
+    "trains": [
+      3
+    ]
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 14,
+  "fields": {
+    "name": "sdfg",
+    "travel_time": 22,
+    "from_city": 8,
+    "to_city": 13,
+    "trains": [
+      3,
+      13
+    ]
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 15,
+  "fields": {
+    "name": "dfgh",
+    "travel_time": 23,
+    "from_city": 8,
+    "to_city": 13,
+    "trains": [
+      15
+    ]
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 1,
+  "fields": {
+    "name": "Поезд 1",
+    "travel_time": 16,
+    "from_city": 11,
+    "to_city": 13
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 2,
+  "fields": {
+    "name": "Поезд 2",
+    "travel_time": 15,
+    "from_city": 9,
+    "to_city": 12
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 3,
+  "fields": {
+    "name": "Нижний Новгород - Москва",
+    "travel_time": 11,
+    "from_city": 11,
+    "to_city": 13
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 4,
+  "fields": {
+    "name": "Москва - Санкт Петербург",
+    "travel_time": 21,
+    "from_city": 13,
+    "to_city": 6
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 5,
+  "fields": {
+    "name": "Поезд 3",
+    "travel_time": 13,
+    "from_city": 8,
+    "to_city": 10
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 6,
+  "fields": {
+    "name": "Поезд 4",
+    "travel_time": 22,
+    "from_city": 8,
+    "to_city": 14
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 7,
+  "fields": {
+    "name": "Поезд 5",
+    "travel_time": 5,
+    "from_city": 13,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 8,
+  "fields": {
+    "name": "Поезд 6",
+    "travel_time": 11,
+    "from_city": 13,
+    "to_city": 11
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 9,
+  "fields": {
+    "name": "Поезд 7",
+    "travel_time": 35,
+    "from_city": 11,
+    "to_city": 14
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 10,
+  "fields": {
+    "name": "Поезд 8",
+    "travel_time": 22,
+    "from_city": 13,
+    "to_city": 14
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 11,
+  "fields": {
+    "name": "Поезд 10",
+    "travel_time": 31,
+    "from_city": 11,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 12,
+  "fields": {
+    "name": "Поезд 12",
+    "travel_time": 11,
+    "from_city": 6,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 13,
+  "fields": {
+    "name": "Поезд 13",
+    "travel_time": 11,
+    "from_city": 8,
+    "to_city": 11
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 14,
+  "fields": {
+    "name": "Поезд 14",
+    "travel_time": 11,
+    "from_city": 8,
+    "to_city": 6
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 15,
+  "fields": {
+    "name": "Екатеринбург - Москва",
+    "travel_time": 23,
+    "from_city": 8,
+    "to_city": 13
+  }
+}
+]
