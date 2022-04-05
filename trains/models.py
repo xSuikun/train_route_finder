@@ -25,7 +25,7 @@ class Train(models.Model):
     def clean(self):
         if self.from_city == self.to_city:
             raise ValidationError("Поля 'Откуда' и 'Куда' не могут содержать один и тот же город")
-        qs = Train.objects.filter(from_city=self.from_city, to_city=self.to_city,
+        qs = Train.objects.filter(name=self.name, from_city=self.from_city, to_city=self.to_city,
                                   travel_time=self.travel_time).exclude(pk=self.pk)
         if qs.exists():
             raise ValidationError('Поезд с таким маршрутом и временем пути уже существует')
