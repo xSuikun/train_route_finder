@@ -103,6 +103,14 @@ class RoutesTestCase(TestCase):
         data = {'from_city': self.city_A.id, 'to_city': self.city_B.id, 'cities': [self.city_E.id]}
         form = RouteForm(data=data)
         self.assertFalse(form.is_valid())
+        data = {'from_city': self.city_A.id, 'to_city': self.city_B.id, 'travel_time': 9.99, 'cities': [self.city_E.id]}
+        form = RouteForm(data=data)
+        self.assertFalse(form.is_valid())
+
+    def test_error_message_need_more_time(self):
+        data = {'from_city': self.city_A.id, 'to_city': self.city_E.id, 'travel_time': 9, 'cities': [self.city_C.id]}
+        response = self.client.post('/routes/find_routes/', data)
+        self.assertContains(response, 'Нет маршрутов, подходящих под выбранное время пути', 1, status_code=200)
 
 
 
