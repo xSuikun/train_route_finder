@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from cities.models import City
+from routes.forms import RouteForm
 from routes.models import Route
 from routes.services import get_graph, get_dfs_paths
 from trains.models import Train
@@ -83,7 +84,6 @@ class RoutesTestCase(TestCase):
 
     def test_routes_detail_view(self):
         response = self.client.get(reverse('routes:detail', kwargs={'pk': self.city_A.id}))
-        print(reverse('routes:detail', kwargs={'pk': self.city_A.id}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='routes/route_detail.html')
         self.assertEqual(response.resolver_match.func.__name__, routes_views.RouteDetail.as_view().__name__)
@@ -93,6 +93,16 @@ class RoutesTestCase(TestCase):
         graph = get_graph(trains)
         all_routes = list(get_dfs_paths(graph, self.city_A.id, self.city_E.id))
         self.assertEqual(len(all_routes), 4)
+
+    def test_valid_find_route_form(self):
+        data = {'from_city': self.city_A.id, 'to_city': self.city_B.id, 'travel_time': 9, 'cities': [self.city_E.id]}
+        form = RouteForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_find_route_form(self):
+        data = {'from_city': self.city_A.id, 'to_city': self.city_B.id, 'cities': [self.city_E.id]}
+        form = RouteForm(data=data)
+        self.assertFalse(form.is_valid())
 
 
 

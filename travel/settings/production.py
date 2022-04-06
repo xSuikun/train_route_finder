@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['find-travel-route.herokuapp.com']
+ALLOWED_HOSTS = ['find-travel-route.herokuapp.com', 'sad-site.herokuapp.com']
 
 # Application definition
 
